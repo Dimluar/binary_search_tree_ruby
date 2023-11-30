@@ -24,32 +24,23 @@ class Tree
   end
 
   def insert(value, node = root)
-    return @root = build_tree([value]) if node.nil?
-    return self if value == node.value
+    return reset_root(value) if root.nil?
+    return Node.new(value) if node.nil?
 
     if value < node.value
-      return insert_nil_left(value, node) if node.left.nil?
-
-      node = node.left
-    else
-      return insert_nil_right(value, node) if node.right.nil?
-
-      node = node.right
+      node.left = insert(value, node.left)
+    elsif value > node.value
+      node.right = insert(value, node.right)
     end
-    insert(value, node)
+    node
   end
 
   private
 
   attr_writer :root
 
-  def insert_nil_left(value, node)
-    node.left = Node.new(value)
-    self
-  end
-
-  def insert_nil_right(value, node)
-    node.right = Node.new(value)
-    self
+  def reset_root(value)
+    @root = Node.new(value)
+    root
   end
 end
