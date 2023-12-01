@@ -112,6 +112,15 @@ class Tree # rubocop:disable Metrics/ClassLength
     height - height(node)
   end
 
+  def balanced?(node = root)
+    return true if node.nil?
+
+    left = balanced?(node.left)
+    right = balanced?(node.right)
+
+    height(node.left) - height(node.right) <= 1 && left && right
+  end
+
   private
 
   attr_writer :root
