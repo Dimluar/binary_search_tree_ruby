@@ -98,6 +98,13 @@ class Tree # rubocop:disable Metrics/ClassLength
     values
   end
 
+  def height(node = root)
+    node = node.instance_of?(Node) ? find(node.value) : find(node) unless node.nil?
+    return 0 if node.nil?
+
+    [height(node.left), height(node.right)].max + 1
+  end
+
   private
 
   attr_writer :root
