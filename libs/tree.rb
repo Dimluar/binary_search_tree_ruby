@@ -4,7 +4,7 @@ require_relative 'node'
 require_relative 'sortable'
 
 # Binary search tree data structure
-class Tree
+class Tree # rubocop:disable Metrics/ClassLength
   include Sortable
   attr_reader :root
 
@@ -67,6 +67,34 @@ class Tree
       block.call(queue.last.value) if block_given?
       queue.pop
     end
+    values
+  end
+
+  def preorder(node = root, values = [], &block)
+    return values if node.nil?
+
+    block.call(node.value) if block_given?
+    values.append(node.value)
+    values = preorder(node.left, values, &block)
+    preorder(node.right, values, &block)
+  end
+
+  def inorder(node = root, values = [], &block)
+    return values if node.nil?
+
+    values = inorder(node.left, values, &block)
+    values.append(node.value)
+    block.call(node.value) if block_given?
+    inorder(node.right, values, &block)
+  end
+
+  def postorder(node = root, values = [], &block)
+    return values if node.nil?
+
+    values = postorder(node.left, values, &block)
+    values = postorder(node.right, values, &block)
+    block.call(node.value) if block_given?
+    values.append(node.value)
     values
   end
 
