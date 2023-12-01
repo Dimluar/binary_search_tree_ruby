@@ -60,9 +60,25 @@ class Tree
     node
   end
 
+  def level_order(queue = [root], values = [], &block)
+    until queue.empty?
+      queue = add_to_queue(queue)
+      values.append(queue.last.value)
+      block.call(queue.last.value) if block_given?
+      queue.pop
+    end
+    values
+  end
+
   private
 
   attr_writer :root
+
+  def add_to_queue(queue)
+    queue.unshift(queue.last.left) unless queue.last.left.nil?
+    queue.unshift(queue.last.right) unless queue.last.right.nil?
+    queue
+  end
 
   def delete_node(node)
     if node.left.nil?
