@@ -121,6 +121,10 @@ class Tree # rubocop:disable Metrics/ClassLength
     height(node.left) - height(node.right) <= 1 && left && right
   end
 
+  def rebalance
+    @root = build_tree(inorder)
+  end
+
   private
 
   attr_writer :root
