@@ -10,11 +10,11 @@ The next methods are included:
 - #insert: adds a new value to the tree.
 - #delete: eliminates an existing value from the tree.
 - #find: returns an existing node from the tree, nil if it's not in it.
-- #level_order: itinerates in breadth-first level order yielding each node to a given block. Returns array of values given block or not.
-- #preorder, #inorder, #postorder: itinerates in it's respective depth-first order yielding each node to a given block. Returns array of values given block or not.
+- #level_order: iterates in breadth-first level order yielding each node to a given block. Returns array of values given block or not.
+- #preorder, #inorder, #postorder: iterates in it's respective depth-first order yielding each node to a given block. Returns array of values given block or not.
 - #height: returns height of selected node, can be given value instead of node.
 - #depth: returns depth of selected node, can be given value instead of node. Returns -1 if node it's not in tree.
 - #balanced?: returns true if the tree is balanced.
 - #rebalance: remakes the tree from scratch with it's current nodes.
 
-The main.rb file contains an example script of the creation of a tree, the insertion of values the four itineration methods and the rebalancing of the tree.
+The main.rb file contains an example script of the creation of a tree, the insertion of values the four iteration methods and the re-balancing of the tree.
