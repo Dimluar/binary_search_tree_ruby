@@ -48,6 +48,18 @@ class Tree
     delete_node(node)
   end
 
+  def find(value, node = root)
+    return node if node.nil?
+
+    if value < node.value
+      return find(value, node.left)
+    elsif value > node.value
+      return find(value, node.right)
+    end
+
+    node
+  end
+
   private
 
   attr_writer :root
