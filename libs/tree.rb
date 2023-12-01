@@ -35,9 +35,52 @@ class Tree
     node
   end
 
+  def delete(value, node = root)
+    return node if node.nil?
+
+    if value < node.value
+      node.left = delete(value, node.left)
+      return node
+    elsif value > node.value
+      node.right = delete(value, node.right)
+      return node
+    end
+    delete_node(node)
+  end
+
   private
 
   attr_writer :root
+
+  def delete_node(node)
+    if node.left.nil?
+      node.right
+    elsif node.right.nil?
+      node.left
+    else
+      delete_with_children(node)
+    end
+  end
+
+  def delete_with_children(node)
+    parent = node
+    succesor = node.right
+    until succesor.left.nil?
+      parent = succesor
+      succesor = succesor.left
+    end
+    delete_set_directions(node, parent, succesor)
+    node
+  end
+
+  def delete_set_directions(node, parent, succesor)
+    if parent == node
+      parent.right = succesor.right
+    else
+      parent.left = succesor.right
+    end
+    node.value = succesor.value
+  end
 
   def reset_root(value)
     @root = Node.new(value)

@@ -3,8 +3,7 @@
 # BST element
 class Node
   include Comparable
-  attr_reader :value
-  attr_accessor :left, :right
+  attr_accessor :value, :left, :right
 
   def initialize(value = nil, left = nil, right = nil)
     @value = value
